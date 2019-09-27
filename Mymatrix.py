@@ -22,7 +22,7 @@ class MyMatrix:
                 l.append(j)
        
         mx = len(str(max(l)))
-        a= " "
+        a= ""
         for i in self.__data:
             a = a + "\n"
             for j in i:
@@ -77,7 +77,7 @@ class MyMatrix:
                 c +=1
         return transmat
     def transpose(self):
-        self.__data = m.transposed()
+        self.__data = MyMatrix(self.__data).transposed()
         return self.__data
     def get_data(self) -> list:
         return self.__data
@@ -99,11 +99,11 @@ class MyMatrix:
         return newdate
     def iadd(self, other):  # change the name!
         """self += other."""
-        self.__data = m.__add__(other)
+        self.__data = MyMatrix(self.__data).__add__(other)
         return self.__data
         
         
     def isub(self, other):  # change the name!
         """self -= other."""
-        self.__data = m.__sub__(other)
+        self.__data = MyMatrix(self.__data).__sub__(other)
         return self.__data
