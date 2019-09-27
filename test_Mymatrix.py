@@ -1,9 +1,9 @@
 from Mymatrix import MyMatrix
 
 def test_repr():
-    sl = [[1,2,3]]
+    sl = [[1,2,3],[4,5,6]]
     m = MyMatrix(sl)
-    assert(m.__repr__() == '1 2 3')
+    assert(m.__repr__() == '1 2 3\n 4 5 6')
 def test_size():
     sl = [[1,2,3],[4,5,6]]
     m = MyMatrix(sl)
@@ -42,13 +42,23 @@ def test_transposed():
     tr = m.transpose()
     assert(tr== [[1,4],[2,5],[3,6]])
     assert(m.get_data()== [[1,2,3],[4,5,6]])
-def test__add__(other):
+def test__add__():
     other = [[3,5,6],[9,4,6]]
     sl = [[1,2,3],[4,5,6]]
     m = MyMatrix(sl)
     assert(m.__add__(other)== [[4,7,9],[13,9,12]])
-def test__sub__(other):
+def test__sub__():
     other = [[1,1,2],[2,2,3]]
     sl = [[1,2,3],[4,5,6]]
     m = MyMatrix(sl)
     assert(m.__sub__(other)== [[0,1,1],[2,3,3]])
+def test_iadd():
+    other = [[1,1,2],[2,2,3]]
+    sl = [[1,2,3],[4,5,6]]
+    m = MyMatrix(sl)
+    assert(m.iadd(other)== [[4,7,9],[13,9,12]])
+def test_isub():
+    other = [[1,1,2],[2,2,3]]
+    sl = [[1,2,3],[4,5,6]]
+    m = MyMatrix(sl)
+    assert(m.isub(other)== [[0,1,1],[2,3,3]])
