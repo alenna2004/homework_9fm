@@ -31,16 +31,17 @@ class MyMatrix:
 
 
     def size(self) -> tuple:
-
-        return "(" + str(len(self.__data)) +"," + str(len(self.__data[0]))  +")"
-       
+        try:
+            return len(self.__data),len(self.__data[0])
+        except:
+            return 0,0 
 
     def flip_up_down(self):
 
         for i in range(len(self.__data)//2):
             
             self.__data[i],self.__data[-i-1] = self.__data[-i-1],self.__data[i]
-        return self.__data
+        return MyMatrix(self.__data)
     
     
     def flip_left_right(self):
@@ -48,7 +49,7 @@ class MyMatrix:
         for i in range(len(self.__data)):
             for j in range(len(self.__data[i])//2):
                 self.__data[i][j],self.__data[i][-j-1] = self.__data[i][-j-1],self.__data[i][j]
-        return self.__data
+        return MyMatrix(self.__data)
 
     # методы flip_ ИЗМЕНЯЮТ матрицу
     # методы flipped_ по сути делают то же самое,
@@ -66,6 +67,12 @@ class MyMatrix:
         return s1
 
     def transposed(self):
+        sdata = copy.deepcopy(self.__data)
+        transmat = MyMatrix(sdata).transpose()
+        return transmat
+    
+    def transpose(self):
+        #self.__data = MyMatrix(self.__data).transposed()
         transmat = []
         c = 0
         for j in range(len(self.__data)):
@@ -75,35 +82,37 @@ class MyMatrix:
                     st.append(self.__data[i][c])
                 transmat.append(st)
                 c +=1
-        return transmat
-    def transpose(self):
-        self.__data = MyMatrix(self.__data).transposed()
-        return self.__data
+        #trans = copy.deepcopy(transmat)
+        #return MyMatrix(transmat)
+        self.__data = transmat
+        return MyMatrix(self.__data)
+    
     def get_data(self) -> list:
-        return self.__data
-    def __add__(self, other):
-        
+        copd = copy.deepcopy(self.__data)
+        return copd
+    
+    def __add__(self, other):      
         newdate = [[0]*len(self.__data[0])]*len(self.__data)
         for i in range(len(self.__data)):
             newdate[i] = copy.deepcopy(self.__data[i])
             for j in range(len(self.__data[i])):
-                newdate[i][j] = self.__data[i][j] + other[i][j]
+                newdate[i][j] = self.__data[i][j] + other.__data[i][j]
 
-        return newdate
+        return MyMatrix(newdate)
     def __sub__(self, other):
         newdate = [[0]*len(self.__data[0])]*len(self.__data)
         for i in range(len(self.__data)):
             newdate[i] = copy.deepcopy(self.__data[i])
             for j in range(len(self.__data[i])):
-                newdate[i][j] = self.__data[i][j] - other[i][j]
-        return newdate
-    def iadd(self, other):  # change the name!
+                newdate[i][j] = self.__data[i][j] - other.__data[i][j]
+        return MyMatrix(newdate)
+    def __iadd__(self, other):  # change the name!
         """self += other."""
         self.__data = MyMatrix(self.__data).__add__(other)
-        return self.__data
+        return MyMatrix(self.__data)
         
         
-    def isub(self, other):  # change the name!
+    def __isub__(self, other):  # change the name!
         """self -= other."""
         self.__data = MyMatrix(self.__data).__sub__(other)
-        return self.__data
+        return MyMatrix(self.__data)
