@@ -89,11 +89,21 @@ class MyMatrix:
             for j in range(len(self.__data[i])):
                 newdate[i][j] = self.__data[i][j] + other[i][j]
 
-        return MyMatrix(newdate)
+        return newdate
     def __sub__(self, other):
         newdate = [[0]*len(self.__data[0])]*len(self.__data)
         for i in range(len(self.__data)):
             newdate[i] = copy.deepcopy(self.__data[i])
             for j in range(len(self.__data[i])):
                 newdate[i][j] = self.__data[i][j] - other[i][j]
-        return MyMatrix(newdate)
+        return newdate
+    def iadd(self, other):  # change the name!
+        """self += other."""
+        self.__data = m.__add__(other)
+        return self.__data
+        
+        
+    def isub(self, other):  # change the name!
+        """self -= other."""
+        self.__data = m.__sub__(other)
+        return self.__data
