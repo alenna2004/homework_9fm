@@ -38,7 +38,7 @@ def test_transpose():
     s = [[1,2,3],[4,5,6]]
     mat = MyMatrix(s)
     tran = mat.transpose()
-    assert(tran.size() == (3,2)
+    assert(tran.size() == (3,2))
     assert(tran.get_data()== [[1,4],[2,5],[3,6]])
 def test_transposed():
     s = [[1,2,3],[4,5,6]]
@@ -81,3 +81,4 @@ def test_isub():
 def test_empt():
     empt_m = MyMatrix([])
     assert(empt_m.size() == (0,0))
+
