@@ -109,10 +109,10 @@ class MyMatrix:
     def __iadd__(self, other):  # change the name!
         """self += other."""
         self.__data = MyMatrix(self.__data).__add__(other)
-        return MyMatrix(self.__data)
+        return self.__data
         
         
     def __isub__(self, other):  # change the name!
         """self -= other."""
         self.__data = MyMatrix(self.__data).__sub__(other)
-        return MyMatrix(self.__data)
+        return self.__data
