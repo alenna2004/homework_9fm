@@ -16,12 +16,12 @@ class MyMatrix:
 
     def __repr__(self) -> str:
 
-        l = []
+        e = []
         for i in self.__data:
             for j in i:
-                l.append(j)
+                e.append(j)
        
-        mx = len(str(max(l)))
+        mx = len(str(max(e)))
         a= ""
         for i in self.__data:
             a = a + "\n"
@@ -41,7 +41,7 @@ class MyMatrix:
         for i in range(len(self.__data)//2):
             
             self.__data[i],self.__data[-i-1] = self.__data[-i-1],self.__data[i]
-        return MyMatrix(self.__data)
+        return self
     
     
     def flip_left_right(self):
@@ -49,22 +49,20 @@ class MyMatrix:
         for i in range(len(self.__data)):
             for j in range(len(self.__data[i])//2):
                 self.__data[i][j],self.__data[i][-j-1] = self.__data[i][-j-1],self.__data[i][j]
-        return MyMatrix(self.__data)
+        return self
 
     # методы flip_ ИЗМЕНЯЮТ матрицу
     # методы flipped_ по сути делают то же самое,
     # но возвращают изменённую КОПИЮ матрицы
     def flipped_up_down(self):
-
         sdd = copy.deepcopy(self.__data)
-        sdd = MyMatrix(sdd)
-        s = sdd.flip_up_down()
-        return s
+        sdd = MyMatrix(sdd).flip_up_down()
+        return sdd
+    
     def flipped_left_right(self):
         ss = copy.deepcopy(self.__data)
-        ss = MyMatrix(ss)
-        s1 = ss.flip_left_right()
-        return s1
+        ss = MyMatrix(ss).flip_left_right()
+        return ss
 
     def transposed(self):
         sdata = copy.deepcopy(self.__data)
@@ -84,8 +82,8 @@ class MyMatrix:
                 c +=1
         #trans = copy.deepcopy(transmat)
         #return MyMatrix(transmat)
-        self.__data = transmat
-        return MyMatrix(self.__data)
+        self = MyMatrix(transmat)
+        return self
     
     def get_data(self) -> list:
         copd = copy.deepcopy(self.__data)
@@ -108,11 +106,11 @@ class MyMatrix:
         return MyMatrix(newdate)
     def __iadd__(self, other):  # change the name!
         """self += other."""
-        self.__data = MyMatrix(self.__data).__add__(other)
-        return self.__data
+        self = MyMatrix(self.__data).__add__(other)
+        return self
         
         
     def __isub__(self, other):  # change the name!
         """self -= other."""
-        self.__data = MyMatrix(self.__data).__sub__(other)
-        return self.__data
+        self = MyMatrix(self.__data).__sub__(other)
+        return self
