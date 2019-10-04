@@ -130,8 +130,10 @@ def test_rotated_180():
     
 def test_getitem():
     mat = MyMatrix(s)
-    ii = mat[0,0]
-    assert(ii == 1)
+    i1 = mat[0,0]
+    i2 = mat[0][0]
+    assert(i1 == 1)
+    assert(i1==i2)
 
     
 def test_setitem():
