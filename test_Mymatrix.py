@@ -9,6 +9,8 @@ def test_repr():
 def test_size():
     mat = MyMatrix(s)
     assert(mat.size() == (2,3))
+    empt_m = MyMatrix([])
+    assert(empt_m.size() == (0,0))
 
 
 def test_get_data():
@@ -87,7 +89,3 @@ def test_isub():
     mat -= oth
     assert(mat.get_data()== [[0,1,1],[2,3,3]])
 
-
-def test_empt():
-    empt_m = MyMatrix([])
-    assert(empt_m.size() == (0,0))
