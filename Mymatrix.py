@@ -69,6 +69,7 @@ class MyMatrix:
         transmat = MyMatrix(sdata).transpose()
         return transmat
     
+
     def transpose(self):
         #self.__data = MyMatrix(self.__data).transposed()
         transmat = []
@@ -80,9 +81,7 @@ class MyMatrix:
                     st.append(self.__data[i][c])
                 transmat.append(st)
                 c +=1
-        #trans = copy.deepcopy(transmat)
-        #return MyMatrix(transmat)
-        self = MyMatrix(transmat)
+        self.__data = transmat
         return self
     
     def get_data(self) -> list:
