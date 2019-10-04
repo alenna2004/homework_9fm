@@ -104,6 +104,7 @@ class MyMatrix:
             for j in range(len(self.__data[i])):
                 newdate[i][j] = self.__data[i][j] - other.__data[i][j]
         return MyMatrix(newdate)
+    
     def __iadd__(self, other):  # change the name!
         """self += other."""
         self = MyMatrix(self.__data).__add__(other)
@@ -114,19 +115,20 @@ class MyMatrix:
         """self -= other."""
         self = MyMatrix(self.__data).__sub__(other)
         return self
+    
     def rotate_clockwise_90(self):
-        self= MyMatrix(self.__data).transpose()
-        self = self.flip_left_right()
+        self = self.transpose()
+        self.flip_left_right()
         return self
 
     def rotate_counterclockwise_90(self):
-        self = MyMatrix(self.__data).transpose()
-        self = self.flip_up_down()
+        self = self.transpose()
+        self.flip_up_down()
         return self
 
     def rotate_180(self):
-        self = MyMatrix(self.__data).flip_left_right()
-        self = self.flip_up_down()
+        self.flip_left_right()
+        self.flip_up_down()
         return self 
     
     def rotated_clockwise_90(self):
