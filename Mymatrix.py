@@ -143,7 +143,10 @@ class MyMatrix:
         return MyMatrix(se).rotate_180()
     
     def __getitem__(self,ind):
-        return self.__data[ind[0]][ind[1]]
+        if type(ind) == tuple:
+            return self.__data[ind[0]][ind[1]]
+        else:
+            return self.__data[ind]
     
     def __setitem__(self,ind,val):  
         self.__data[ind[0]][ind[1]]= val
