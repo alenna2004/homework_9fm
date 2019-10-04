@@ -88,4 +88,41 @@ def test_isub():
     oth = MyMatrix(other)
     mat -= oth
     assert(mat.get_data()== [[0,1,1],[2,3,3]])
+    
+    
+def test_rotate_clockwise_90():
+    mat = MyMatrix(s)
+    rotm = mat.rotate_clockwise_90()
+    assert(rotm.get_data() == [[4,1],[5,2],[6,3]])
 
+           
+def test_rotated_clockwise_90():
+    mat = MyMatrix(s)
+    rotm = mat.rotated_clockwise_90()
+    assert(rotm.get_data() == [[4,1],[5,2],[6,3]])
+    assert(mat.get_data()== s)
+
+    
+def test_rotate_counterclockwise_90():
+    mat = MyMatrix(s)
+    rotmcw = mat.rotate_counterclockwise_90()
+    assert(rotmcw.get_data() == [[3,6],[2,5],[1,4]])
+    
+    
+def test_rotated_counterclockwise_90():
+    mat = MyMatrix(s)
+    rotmcw = mat.rotated_counterclockwise_90()
+    assert(rotmcw.get_data() == [[3,6],[2,5],[1,4]])
+    assert(mat.get_data()== s)
+    
+def test_rotate_180():
+    mat = MyMatrix(s)
+    rt = mat.rotate_180()
+    assert(rt.get_data() == [[6,5,4],[3,2,1]])
+    
+    
+def test_rotated_180():
+    mat = MyMatrix(s)
+    rt = mat.rotated_180()
+    assert(rt.get_data() == [[6,5,4],[3,2,1]])
+    assert(mat.get_data()== s)
