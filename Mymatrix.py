@@ -114,3 +114,35 @@ class MyMatrix:
         """self -= other."""
         self = MyMatrix(self.__data).__sub__(other)
         return self
+    def rotate_clockwise_90(self):
+        self= MyMatrix(self.__data).transpose()
+        self = self.flip_left_right()
+        return self
+
+    def rotate_counterclockwise_90(self):
+        self = MyMatrix(self.__data).transpose()
+        self = self.flip_up_down()
+        return self
+
+    def rotate_180(self):
+        self = MyMatrix(self.__data).flip_left_right()
+        self = self.flip_up_down()
+        return self 
+    
+    def rotated_clockwise_90(self):
+        seld = copy.deepcopy(self.__data)
+        return MyMatrix(seld).rotate_clockwise_90()
+
+    def rotated_counterclockwise_90(self):
+        sel = copy.deepcopy(self.__data)
+        return MyMatrix(sel).rotate_counterclockwise_90()
+
+    def rotated_180(self):
+        se = copy.deepcopy(self.__data)
+        return MyMatrix(se).rotate_180()
+    
+    def __getitem__(self,ind):
+        return self.__data[ind[0]][ind[1]]
+    
+    def __setitem__(self,ind,val):  
+        self.__data[ind[0]][ind[1]]= val
