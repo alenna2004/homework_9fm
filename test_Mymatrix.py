@@ -126,3 +126,15 @@ def test_rotated_180():
     rt = mat.rotated_180()
     assert(rt.get_data() == [[6,5,4],[3,2,1]])
     assert(mat.get_data()== s)
+    
+    
+def test_getitem():
+    mat = MyMatrix(s)
+    ii = mat[0,0]
+    assert(ii == 1)
+
+    
+def test_setitem():
+    mat = MyMatrix(s)
+    mat[0,0] = 9
+    assert(mat[0,0] == 9)
