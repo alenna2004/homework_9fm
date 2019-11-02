@@ -1,0 +1,39 @@
+def get_transport_duration_by_2_points(lat1: float, lon1: float, lat2: float, lon2: float):
+    request_url = 'https://catalog.api.2gis.ru/ctx/2.0/moscow?key=rurbbn3446'
+    pl = '{"locale":"ru","enable_schedule":false,"source":{"point":{"lon":38.9746,"lat":55.7903},"name":"Source"},"target":{"point":{"lon":37.5146,"lat":55.777},"object_id":"4504338361746784","name":"Target"},"transport":["bus","trolleybus","tram","shuttle_bus","metro","suburban_train","funicular_railway","monorail","river_transport","cable_car","light_rail","premetro","light_metro","aeroexpress","pedestrian"],"purpose":"routeSearch","viewport":{"topLeft":{"x":37.69514170692409,"y":55.803894638491826},"bottomRight":{"x":37.905532691311606,"y":55.62767439581627},"zoom":11.283740048463168}}'
+    new_pl = '{"locale":"ru","enable_schedule":false,"source":{"point":{"lon":37.515436,"lat":55.845869},"object_id":"4504338361746862","name":"Source"},"target":{"point":{"lon":37.529325,"lat":55.77634},"object_id":"4504338361780132","name":"Target"},"transport":["bus","trolleybus","tram","shuttle_bus","metro","suburban_train","funicular_railway","monorail","river_transport","cable_car","light_rail","premetro","light_metro","aeroexpress","pedestrian"],"purpose":"routeSearch","viewport":{"topLeft":{"x":37.34498644037593,"y":55.9678852460743},"bottomRight":{"x":37.81593252796108,"y":55.57343207828106},"zoom":10.121251061946547}}'
+    payl = json.loads(new_pl)
+    payl['source']['point']['lon'] = lon1
+    payl['source']['point']['lat'] = lat1
+    payl['target']['point']['lon'] = lon2
+    payl['target']['point']['lat'] = lat2
+    payload = json.dumps(payl)
+    data = requests.post(url=request_url, data=payload)
+    marh = json.loads(data.text)
+    return marh[0]['total_duration']
+    
+def get_pedestrian_duration_by_2_points_2(lat1: float, lon1: float, lat2: float, lon2: float):
+    request_url = 'https://catalog.api.2gis.ru/pedestrian/4.0.0/moscow?key=rurbbn3446'
+    new_pl = '{"locale":"ru","point_a_name":"Source","point_b_name":"Target","points":[{"type":"pedo","x":37.515436,"y":55.845869,"object_id":"4504338361746862"},{"type":"pedo","x":37.529325,"y":55.77634,"object_id":"4504338361780132"}],"type":"pedestrian","purpose":"autoSearch","viewport":{"topLeft":{"x":37.446598731082254,"y":55.85263662608537},"bottomRight":{"x":37.569709268917755,"y":55.74979477105843},"zoom":12.05685861953393}}'
+    payl = json.loads(new_pl)
+    payl['points'][0]['x'] = lon1
+    payl['points'][0]['y'] = lat1
+    payl['points'][1]['x'] = lon2
+    payl['points'][1]['y'] = lat2
+    payload = json.dumps(payl)
+    data = requests.post(url=request_url, data=payload)
+    marh = json.loads(data.text)
+    return marh['result'][0]['total_duration']
+    
+def get_pedestrian_distance_by_2_points_2(lat1: float, lon1: float, lat2: float, lon2: float):
+    request_url = 'https://catalog.api.2gis.ru/pedestrian/4.0.0/moscow?key=rurbbn3446'
+    new_pl = '{"locale":"ru","point_a_name":"Source","point_b_name":"Target","points":[{"type":"pedo","x":37.515436,"y":55.845869,"object_id":"4504338361746862"},{"type":"pedo","x":37.529325,"y":55.77634,"object_id":"4504338361780132"}],"type":"pedestrian","purpose":"autoSearch","viewport":{"topLeft":{"x":37.446598731082254,"y":55.85263662608537},"bottomRight":{"x":37.569709268917755,"y":55.74979477105843},"zoom":12.05685861953393}}'
+    payl = json.loads(new_pl)
+    payl['points'][0]['x'] = lon1
+    payl['points'][0]['y'] = lat1
+    payl['points'][1]['x'] = lon2
+    payl['points'][1]['y'] = lat2
+    payload = json.dumps(payl)
+    data = requests.post(url=request_url, data=payload)
+    marh = json.loads(data.text)
+    return marh['result'][0]['ui_total_distance']['value']
