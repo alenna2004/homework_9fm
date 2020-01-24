@@ -54,3 +54,11 @@ def alfa_pic(start_adress,end_adress):
                  img.putpixel((i,j), [0,0,0,0])
     img.save(end_adress, "PNG")
 
+#задание 5
+
+def is_it_image(name):
+    try:
+        im = Image.open(str(name))
+        return True
+    except OSError:
+        return False
