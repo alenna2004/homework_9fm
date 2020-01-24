@@ -62,3 +62,18 @@ def is_it_image(name):
         return True
     except OSError:
         return False
+    
+  #задание 7
+
+from PIL import ImageDraw
+im_list = []
+size = (100,100)
+col_1= (225,100,0)
+col_2 = (225,0,100)
+for i in range(100):
+    im = Image.new("RGB", size, col_1)
+    draw = draw = ImageDraw.Draw(im)
+    draw.line([(i,i),(100-i,100-i)])
+    im_list.append(im)
+
+im.save('line.gif', save_all=True, append_images=im_list)
