@@ -12,6 +12,7 @@ with open("out.csv", "w", newline="") as f:
 df = read_csv("out.csv")
 lis
 
+
 # 3
 def create_table_without_duplicate(sheet_name: str, row_number: int, col_number: int):
     sh = gc.open('conduit 9')
@@ -22,6 +23,7 @@ def create_table_without_duplicate(sheet_name: str, row_number: int, col_number:
         return create_table_without_duplicate(sheet_name, row_number,col_number)
         
 create_table_without_duplicate('Nikolaeva',30,20)
+
 
 # 4
 def copy_student_marks(surname: str, row_number: int):
@@ -48,3 +50,15 @@ def copy_student_marks(surname: str, row_number: int):
         for i in range(len(marks)):
             to_worksheet.update_cell(row_number, i+1, marks[i])
 copy_student_marks('Николаева', 3)
+
+
+# 5
+def titles_of_lists(table_name: str):
+    sh = gc.open(table_name)
+    worksheet_list = sh.worksheets()
+    title_list = []
+    for i in worksheet_list:
+        title_list.append(i.title)
+    return title_list
+t_list = titles_of_lists('conduit 9')
+print(t_list)
