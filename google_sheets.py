@@ -25,7 +25,7 @@ def create_table_without_duplicate(sheet_name: str, row_number: int, col_number:
 create_table_without_duplicate('Nikolaeva',30,20)
 
 
-# 4
+# 4(4.2)
 def copy_student_marks(surname: str, row_number: int):
     if row_number < 2 or row_number > 40:
         raise Exception("Вы ввели неадекватный номер строки")
