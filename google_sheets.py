@@ -3,8 +3,8 @@ scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/aut
 creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
 gc = gspread.authorize(creds)
 dir(gc)
-sh = gc.open('conduit9')
-worksheet = sh.worksheet('9')
+sh = gc.openall()
+worksheet = sh[0].worksheet('9')
 lis = worksheet.get_all_values()
 with open("out.csv", "w", newline="") as f:
     writer = csv.writer(f)
@@ -15,11 +15,11 @@ lis
 
 # 3
 def create_table_without_duplicate(sheet_name: str, row_number: int, col_number: int):
-    sh = gc.open('conduit 9')
+    sh = gc.openall()
     try:
-        worksheet = sh.add_worksheet(title=sheet_name, rows=row_number, cols= col_number)
+        worksheet = sh[0].add_worksheet(title=sheet_name, rows=row_number, cols= col_number)
     except:
-        sh.del_worksheet(sh.worksheet(sheet_name))
+        sh[0].del_worksheet(sh[0].worksheet(sheet_name))
         return create_table_without_duplicate(sheet_name, row_number,col_number)
         
 create_table_without_duplicate('Nikolaeva',30,20)
@@ -30,9 +30,9 @@ def copy_student_marks(surname: str, row_number: int):
     if row_number < 2 or row_number > 40:
         raise Exception("Вы ввели неадекватный номер строки")
     else:
-        sh = gc.open('conduit9')
-        from_worksheet = sh.worksheet('9')
-        to_worksheet = sh.worksheet('Nikolaeva')
+        sh = gc.openall()
+        from_worksheet = sh[0].worksheet('9')
+        to_worksheet = sh[0].worksheet('Nikolaeva')
         r1 = from_worksheet.row_values(1)
         r2 = from_worksheet.row_values(2)
         for i in range(len(r1)):
@@ -60,5 +60,5 @@ def titles_of_lists(table_name: str):
     for i in worksheet_list:
         title_list.append(i.title)
     return title_list
-t_list = titles_of_lists('conduit 9')
+t_list = titles_of_lists('conduit9')
 print(t_list)
