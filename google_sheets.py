@@ -44,9 +44,12 @@ def copy_student_marks(surname: str, row_number: int):
         while surname not in lis[i][0]:
             i = i + 1
             if i > len(lis):
-                print("Этого чеовека не существует")
+                raise Exception("Этого человека не существует")
                 break
         marks = lis[i]
+        for i in range(len(marks)):
+            if to_worksheet.row_values(row_number) != []:
+                raise Exception('Эта строка уже занята')
         for i in range(len(marks)):
             to_worksheet.update_cell(row_number, i+1, marks[i])
 copy_student_marks('Николаева', 3)
