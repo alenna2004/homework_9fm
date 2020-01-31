@@ -3,7 +3,7 @@ scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/aut
 creds = ServiceAccountCredentials.from_json_keyfile_name('client_secret.json', scope)
 gc = gspread.authorize(creds)
 dir(gc)
-sh = gc.open('conduit 9')
+sh = gc.open('conduit9')
 worksheet = sh.worksheet('9')
 lis = worksheet.get_all_values()
 with open("out.csv", "w", newline="") as f:
@@ -30,7 +30,7 @@ def copy_student_marks(surname: str, row_number: int):
     if row_number < 2 or row_number > 40:
         raise Exception("Вы ввели неадекватный номер строки")
     else:
-        sh = gc.open('conduit 9')
+        sh = gc.open('conduit9')
         from_worksheet = sh.worksheet('9')
         to_worksheet = sh.worksheet('Nikolaeva')
         r1 = from_worksheet.row_values(1)
